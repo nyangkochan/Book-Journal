@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4efe5">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Private Editor · Bianca's Reading Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&family=Libre+Caslon+Text:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body">
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="admin-shell">
+    <section class="login-card" id="loginView">
+      <span class="eyebrow">PRIVATE EDITOR</span>
+      <h1>Welcome back,<br><em>Bianca.</em></h1>
+      <p>Sign in to add a new story to the shelves.</p>
+      <form id="loginForm">
+        <label>Email<input id="loginEmail" type="email" autocomplete="username" required></label>
+        <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required></label>
+        <button class="primary-button form-button" type="submit">enter the editor <span>→</span></button>
+      </form>
+      <p class="form-message" id="loginMessage"></p>
+      <a class="back-link" href="index.html">← return to reading room</a>
+    </section>
+
+    <section class="editor" id="editorView" hidden>
+      <header class="editor-header">
+        <div>
+          <span class="eyebrow">BIANCA'S PRIVATE DESK</span>
+          <h1>Book editor</h1>
+        </div>
+        <div class="editor-actions">
+          <a href="index.html" target="_blank">View website ↗</a>
+          <button id="logoutButton" class="text-button">Log out</button>
+        </div>
+      </header>
+
+      <div class="editor-layout">
+        <form class="book-form paper-panel" id="bookForm">
+          <div class="form-title">
+            <div>
+              <span class="eyebrow" id="formMode">NEW ENTRY</span>
+              <h2 id="formHeading">Add a book</h2>
+            </div>
+            <button class="text-button" type="button" id="cancelEdit" hidden>Cancel edit</button>
+          </div>
+
+          <input type="hidden" id="bookId">
+          <input type="hidden" id="currentCoverUrl">
+
+          <div class="form-grid">
+            <label class="wide">Book title *<input id="title" required placeholder="Funny Story"></label>
+            <label>Author *<input id="author" required placeholder="Emily Henry"></label>
+            <label>Genre<input id="genre" placeholder="Romance"></label>
+            <label>Rating *
+              <select id="rating" required>
+                <option value="">Choose</option>
+                <option value="5">5.0 — changed me</option>
+                <option value="4.5">4.5 — deeply loved</option>
+                <option value="4">4.0 — really liked</option>
+                <option value="3.5">3.5 — had its moments</option>
+                <option value="3">3.0 — it was okay</option>
+                <option value="2.5">2.5 — not quite mine</option>
+                <option value="2">2.0 — we disagreed</option>
+                <option value="1">1.0 — a difficult relationship</option>
+              </select>
+            </label>
+            <label>Finished date<input id="finishedDate" type="date"></label>
+            <label>Pages<input id="pages" type="number" min="0" placeholder="400"></label>
+            <label>Mood<input id="mood" placeholder="giggling & kicking my feet"></label>
+            <label class="wide">Cover image<input id="coverFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
+            <label class="wide">Short verdict<input id="verdict" maxlength="160" placeholder="For the banter, the longing, and the becoming."></label>
+            <label class="wide">Full review *<textarea id="review" required rows="8" placeholder="What did this book leave behind?"></textarea></label>
+            <label class="wide">Favorite quote<textarea id="quote" rows="3" placeholder="A sentence worth keeping…"></textarea></label>
+          </div>
+
+          <div class="form-checks">
+            <label><input id="favorite" type="checkbox"> Feature this book</label>
+            <label><input id="published" type="checkbox" checked> Publish immediately</label>
+          </div>
+
+          <button class="primary-button form-button" type="submit" id="saveButton">publish to the shelves <span>→</span></button>
+          <p class="form-message" id="formMessage"></p>
+        </form>
+
+        <aside class="entry-list paper-panel">
+          <div class="form-title">
+            <div><span class="eyebrow">YOUR ARCHIVE</span><h2>Existing entries</h2></div>
+            <button class="text-button" id="refreshButton" type="button">Refresh</button>
+          </div>
+          <div id="adminBookList"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
